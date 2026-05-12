@@ -1,0 +1,43 @@
+{
+  "name": "curls-loaders",
+  "version": "1.0.0",
+  "description": "Beautiful mathematical loaders built with Canvas & React. Spirals, Lissajous curves, fractals, and more.",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js"
+  },
+  "license": "MIT",
+  "keywords": [
+    "loader",
+    "spinner",
+    "react",
+    "mathematical",
+    "animation",
+    "canvas",
+    "lissajous",
+    "spiral",
+    "fractal"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src --max-warnings 0"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "5.9.2"
+  }
+}
