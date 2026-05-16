@@ -48,8 +48,8 @@ export function WaveLoader({
           const y =
             cy +
             amp *
-              envelope *
-              Math.sin(freq * 2 * Math.PI * xNorm - t * speed * 2.5 + phaseOffset);
+            envelope *
+            Math.sin(freq * 2 * Math.PI * xNorm - t * speed * 2.5 + phaseOffset);
 
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
