@@ -1,14 +1,15 @@
 "use client";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export default function DocsPage() {
   return (
     <div className="docs-container">
       <Link href="/" className="back-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15 18-6-6 6-6"/></svg>
+        <ArrowLeft className="w-4 h-4" />
         Home
       </Link>
-      <h1 style={{ background: "linear-gradient(135deg, #a78bfa, #f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+      <h1>
         Documentation
       </h1>
       <p>Everything you need to get started with curls-loaders.</p>
@@ -31,9 +32,9 @@ yarn add curls-loaders`}</code></pre>
 function App() {
   return (
     <div>
-      <SpiralLoader size={80} color="#a78bfa" speed={1.2} />
-      <OrbitLoader size={60} particles={4} />
-      <WaveLoader size={100} waves={5} frequency={4} />
+      <SpiralLoader size={80} color="var(--text-primary)" speed={1.2} />
+      <OrbitLoader size={60} />
+      <WaveLoader size={100} />
     </div>
   );
 }`}</code></pre>
@@ -42,7 +43,7 @@ function App() {
       <p>
         In addition to React canvas components, we provide <strong>100+ pure CSS loaders</strong> that
         work anywhere — no JavaScript framework required. Browse the{" "}
-        <Link href="/loaders" style={{ color: "#a78bfa", textDecoration: "underline" }}>loader gallery</Link>,
+        <Link href="/loaders" style={{ color: "var(--text-primary)", fontWeight: 500, textDecoration: "underline" }}>loader gallery</Link>,
         customize with live controls, and copy the CSS + HTML code.
       </p>
       <pre><code>{`<!-- Just paste the CSS and HTML into your project -->
@@ -50,8 +51,8 @@ function App() {
   .cl-spinner {
     width: 40px;
     height: 40px;
-    border: 4px solid rgba(255,255,255,0.15);
-    border-top-color: #a78bfa;
+    border: 4px solid rgba(15, 23, 42, 0.1);
+    border-top-color: #0f172a;
     border-radius: 50%;
     animation: cl-spin 1s linear infinite;
   }
@@ -63,7 +64,7 @@ function App() {
 <div class="cl-spinner"></div>`}</code></pre>
 
       <h2>React Components</h2>
-      <p>The npm package includes 10 mathematical canvas-based loaders:</p>
+      <p>The npm package includes mathematical canvas-based loaders:</p>
       <ul>
         <li><code>SpiralLoader</code> — Archimedean spiral: r = a + b·θ</li>
         <li><code>LissajousLoader</code> — Parametric Lissajous curves</li>
@@ -95,8 +96,8 @@ function App() {
       <pre><code>{`/* Override via inline styles or parent class */
 .my-loader {
   --s: 60px;                     /* Size */
-  --c1: #a78bfa;                 /* Primary color */
-  --c2: rgba(255,255,255,0.1);   /* Secondary color */
+  --c1: #0f172a;                 /* Primary color */
+  --c2: rgba(15,23,42,0.1);      /* Secondary color */
   --sp: 1.5;                     /* Speed multiplier */
   --w: 3px;                      /* Stroke width */
 }`}</code></pre>
@@ -106,21 +107,11 @@ function App() {
 
       <h2>Contributing</h2>
       <p>
-        We welcome contributions! Check out the repository and give us a star ⭐
+        We welcome contributions! Check out the repository and give us a star on GitHub.
       </p>
       <div style={{ marginTop: "1rem", marginBottom: "3rem" }}>
-        <a
-          href="https://github.com/mohit-rajput-raj"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "inline-flex", alignItems: "center", gap: "0.5rem",
-            padding: "0.6rem 1.4rem", borderRadius: 10,
-            background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.25)",
-            color: "#fbbf24", fontWeight: 700, fontSize: "0.9rem",
-          }}
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <a href="https://github.com/mohit-rajput-raj" target="_blank" rel="noopener noreferrer" className="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
           Star on GitHub — mohit-rajput-raj
         </a>
       </div>

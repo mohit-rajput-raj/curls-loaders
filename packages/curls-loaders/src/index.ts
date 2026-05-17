@@ -32,3 +32,22 @@ export type { InfinityLoaderProps } from "./infinity-loader.js";
 
 export { HelixLoader } from "./helix-loader.js";
 export type { HelixLoaderProps } from "./helix-loader.js";
+
+// ─── Equation Loaders (new) ──────────────────────────────
+export { HypotrochoidLoader } from "./hypotrochoid-loader.js";
+export type { HypotrochoidLoaderProps } from "./hypotrochoid-loader.js";
+
+export { EpitrochoidLoader } from "./epitrochoid-loader.js";
+export type { EpitrochoidLoaderProps } from "./epitrochoid-loader.js";
+
+export { ButterflyLoader } from "./butterfly-loader.js";
+export type { ButterflyLoaderProps } from "./butterfly-loader.js";
+
+export { FermatLoader } from "./fermat-loader.js";
+export type { FermatLoaderProps } from "./fermat-loader.js";
+
+export { CardioidLoader } from "./cardioid-loader.js";
+export type { CardioidLoaderProps } from "./cardioid-loader.js";
+
+export { AstroidLoader } from "./astroid-loader.js";
+export type { AstroidLoaderProps } from "./astroid-loader.js";

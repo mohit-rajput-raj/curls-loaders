@@ -1,8 +1,10 @@
 "use client";
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { LOADERS, CATEGORIES } from "../data/loaders";
+
+import { Search, Loader2 } from "lucide-react";
 import { LoaderPreview } from "../components/LoaderPreview";
+import { CATEGORIES, LOADERS } from "../data/loaders";
 
 export default function LoadersPage() {
   const [search, setSearch] = useState("");
@@ -18,12 +20,14 @@ export default function LoadersPage() {
 
   return (
     <div className="page-container">
-      <h1 className="page-title">All Loaders</h1>
+      <h1 className="page-title" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <Loader2 className="w-8 h-8" /> All Loaders
+      </h1>
       <p className="page-subtitle">{LOADERS.length} beautiful CSS loading animations — click any card to customize & copy code</p>
 
-      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "1.5rem", alignItems: "center" }}>
-        <div className="navbar-search" style={{ maxWidth: 300, flex: "1 1 250px" }}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "2rem", alignItems: "center" }}>
+        <div className="navbar-search" style={{ maxWidth: 350, flex: "1 1 280px" }}>
+          <Search className="w-4 h-4 text-slate-400" />
           <input placeholder="Search loaders..." value={search} onChange={e => setSearch(e.target.value)} />
         </div>
         <div className="filter-bar" style={{ margin: 0 }}>
@@ -37,8 +41,8 @@ export default function LoadersPage() {
       </div>
 
       {filtered.length === 0 && (
-        <div style={{ textAlign: "center", padding: "4rem 1rem", color: "#64748b" }}>
-          <p style={{ fontSize: "1.1rem" }}>No loaders found matching "{search}"</p>
+        <div style={{ textAlign: "center", padding: "4rem 1rem", color: "var(--text-muted)" }}>
+          <p style={{ fontSize: "1.1rem" }}>No loaders found matching &ldquo;{search}&rdquo;</p>
         </div>
       )}
 

@@ -3,6 +3,7 @@ import { useState, useMemo, use } from "react";
 import Link from "next/link";
 import { LOADERS } from "../../data/loaders";
 import { LoaderPreview } from "../../components/LoaderPreview";
+import { ArrowLeft, Check, Copy, Terminal, Code2, Settings2, RotateCcw, Box } from "lucide-react";
 
 function formatCSS(css: string): string {
   return css.replace(/\{/g, " {\n  ").replace(/;/g, ";\n  ").replace(/\}/g, "\n}\n").replace(/\n  \n/g, "\n").trim();
@@ -22,8 +23,8 @@ export default function LoaderDetail({ params }: { params: Promise<{ id: string 
   const loader = LOADERS.find(l => l.id === id);
 
   const [size, setSize] = useState(loader?.defaults.size ?? 60);
-  const [color, setColor] = useState(loader?.defaults.color ?? "#a78bfa");
-  const [secondaryColor, setSecondaryColor] = useState(loader?.defaults.secondaryColor ?? "rgba(255,255,255,0.1)");
+  const [color, setColor] = useState(loader?.defaults.color ?? "#0f172a");
+  const [secondaryColor, setSecondaryColor] = useState(loader?.defaults.secondaryColor ?? "rgba(15,23,42,0.1)");
   const [speed, setSpeed] = useState(loader?.defaults.speed ?? 1);
   const [strokeWidth, setStrokeWidth] = useState(loader?.defaults.strokeWidth ?? 3);
   const [codeTab, setCodeTab] = useState<"css" | "html">("css");
@@ -34,7 +35,7 @@ export default function LoaderDetail({ params }: { params: Promise<{ id: string 
     return (
       <div className="detail-container" style={{ textAlign: "center", paddingTop: "10rem" }}>
         <h1 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Loader not found</h1>
-        <Link href="/loaders" style={{ color: "#a78bfa" }}>← Back to all loaders</Link>
+        <Link href="/loaders" className="back-link"><ArrowLeft className="w-4 h-4" /> Back to all loaders</Link>
       </div>
     );
   }
@@ -58,25 +59,22 @@ export default function LoaderDetail({ params }: { params: Promise<{ id: string 
   return (
     <div className="detail-container">
       <Link href="/loaders" className="back-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m15 18-6-6 6-6"/></svg>
+        <ArrowLeft className="w-4 h-4" />
         Back to all loaders
       </Link>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "2rem" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "2rem", flexWrap: "wrap" }}>
         <h1 style={{ fontSize: "1.8rem", fontWeight: 800 }}>{loader.name}</h1>
-        <span className="badge">{loader.category}</span>
+        <span className="badge"><Box className="w-3.5 h-3.5" /> {loader.category}</span>
       </div>
 
       {/* CLI install */}
       <div style={{ marginBottom: "2rem" }}>
         <div className="cli-box" onClick={handleCliCopy} style={{ display: "inline-flex" }}>
-          <span>$ npm i curls-loaders</span>
+          <Terminal className="w-4 h-4 text-slate-400" />
+          <span>npm i curls-loaders</span>
           <button className="copy-btn" aria-label="Copy CLI">
-            {cliCopied ? (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
-            ) : (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            )}
+            {cliCopied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
           </button>
         </div>
       </div>
@@ -89,7 +87,9 @@ export default function LoaderDetail({ params }: { params: Promise<{ id: string 
 
         {/* Controls */}
         <div className="detail-controls">
-          <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.5rem", color: "#a78bfa" }}>Customize</h3>
+          <h3 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "0.25rem", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <Settings2 className="w-5 h-5" /> Customize
+          </h3>
 
           <div className="control-group">
             <label>Size <span>{size}px</span></label>
@@ -108,17 +108,17 @@ export default function LoaderDetail({ params }: { params: Promise<{ id: string 
 
           <div style={{ display: "flex", gap: "1rem" }}>
             <div className="control-group" style={{ flex: 1 }}>
-              <label>Primary Color</label>
+              <label>Primary</label>
               <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-                <input type="color" value={color.startsWith("#") ? color : "#a78bfa"} onChange={e => setColor(e.target.value)} />
-                <span style={{ fontSize: "0.75rem", color: "#64748b", fontFamily: "'Fira Code', monospace" }}>{color}</span>
+                <input type="color" value={color.startsWith("#") ? color : "#0f172a"} onChange={e => setColor(e.target.value)} />
+                <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontFamily: "'Fira Code', monospace" }}>{color}</span>
               </div>
             </div>
             <div className="control-group" style={{ flex: 1 }}>
-              <label>Secondary Color</label>
+              <label>Secondary</label>
               <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-                <input type="color" value={secondaryColor.startsWith("#") ? secondaryColor : "#333333"} onChange={e => setSecondaryColor(e.target.value)} />
-                <span style={{ fontSize: "0.75rem", color: "#64748b", fontFamily: "'Fira Code', monospace" }}>{secondaryColor}</span>
+                <input type="color" value={secondaryColor.startsWith("#") ? secondaryColor : "#e2e8f0"} onChange={e => setSecondaryColor(e.target.value)} />
+                <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontFamily: "'Fira Code', monospace" }}>{secondaryColor}</span>
               </div>
             </div>
           </div>
@@ -131,20 +131,15 @@ export default function LoaderDetail({ params }: { params: Promise<{ id: string 
               setSpeed(loader.defaults.speed);
               setStrokeWidth(loader.defaults.strokeWidth);
             }}
-            style={{
-              padding: "0.4rem 1rem", borderRadius: 8,
-              background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
-              color: "#94a3b8", fontSize: "0.8rem", cursor: "pointer",
-              fontFamily: "'Inter', sans-serif", marginTop: "0.5rem",
-            }}
+            className="btn-outline" style={{ marginTop: "0.5rem", justifyContent: "center" }}
           >
-            Reset to defaults
+            <RotateCcw className="w-4 h-4" /> Reset to defaults
           </button>
         </div>
       </div>
 
       {/* Code Panel */}
-      <div className="code-panel">
+      <div className="code-panel" style={{ marginTop: "2.5rem" }}>
         <div className="code-header">
           <div className="code-tabs">
             <button className={`code-tab ${codeTab === "css" ? "active" : ""}`} onClick={() => setCodeTab("css")}>CSS</button>
@@ -152,9 +147,9 @@ export default function LoaderDetail({ params }: { params: Promise<{ id: string 
           </div>
           <button className="copy-code-btn" onClick={handleCopy}>
             {copied ? (
-              <><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!</>
+              <><Check className="w-4 h-4 text-green-500" /> Copied!</>
             ) : (
-              <><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Code</>
+              <><Copy className="w-4 h-4" /> Copy Code</>
             )}
           </button>
         </div>
